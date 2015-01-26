@@ -29,6 +29,7 @@ function sharek_theme() {
     'sharek' => array(
       'variables' => array(
         'share_url' => NULL,
+        'share_title' => NULL,
         'label' => NULL,
         'popup_width' => NULL,
         'popup_height' => NULL,
@@ -40,31 +41,30 @@ function sharek_theme() {
   );
 }
 
-function example() {
-  $result = array();
-  foreach (module_implements('hook_theme') as $module) {
-    // will call all modules implementing hook_hook_name and
-    // push the results onto the $result array
-    $result[] = module_invoke($module, 'hook_theme');
-  }
-
-  dpm($result);
-}
-
 /**
  * Return button.
  *
  * @param string $network Network name.
  * @param array $options Must contain at least 'share_url' value. Also can get
- *                       'label', 'popup_width' and 'popup-height'.
+ *                        'label', 'popup_width' and 'popup-height'.
  * @param string $style Style name.
  * @return string
  * @throws \Exception
  * @internal param $url
  */
-function sharek_get_button($network, $options, $style = NULL) {
+function sharek_get_button($network, $style = NULL, $options = array()) {
   $options['network'] = $network;
-  return theme('sharek__'. $network, $options);
+  $options['style'] = $style;
+
+  $suggestions = array();
+  if ($style) {
+    $suggestions[] = 'sharek__' . $network . '__' . $style;
+    $suggestions[] = 'sharek__' . $style;
+  }
+  $suggestions[] = 'sharek__' . $network;
+  $suggestions[] = 'sharek';
+
+  return theme($suggestions, $options);
 }
 
 /**
@@ -72,7 +72,32 @@ function sharek_get_button($network, $options, $style = NULL) {
  */
 function template_preprocess_sharek(&$variables) {
   // Set default values.
-  $variables['label'] == NULL ? $variables['label'] = t('Share') : false;
-  $variables['popup_width'] == NULL ? $variables['popup_width'] = 600 : false;
-  $variables['popup_height'] == NULL ? $variables['popup_height'] = 450 : false;
+  global $base_url;
+  $variables['share_url'] === NULL ? $variables['share_url'] = $base_url . '/' . request_path() : FALSE;
+  $variables['share_title'] === NULL ? $variables['share_title'] = drupal_get_title() : FALSE;
+  $variables['label'] === NULL ? $variables['label'] = t('Share') : FALSE;
+  $variables['popup_width'] === NULL ? $variables['popup_width'] = 600 : FALSE;
+  $variables['popup_height'] === NULL ? $variables['popup_height'] = 450 : FALSE;
+  $variables['classes_array'][] = 'sharek-' . $variables['network'];
+  $variables['style'] != NULL ? $variables['classes_array'][] = 'sharek-' . $variables['style'] : $variables['classes_array'][] = 'sharek-default';
+
+  // Get current share count.
+  $sharek = new Sharek();
+  $count = $sharek->getCount($variables['share_url'], array($variables['network']));
+  $variables['share_count'] = $count[$variables['network']];
+
+  // Add styles.
+  drupal_add_css(drupal_get_path('module', 'sharek') . '/css/sharek.css');
+}
+
+/**
+ * Implements hook_process_hook
+ */
+function template_process_sharek(&$variables) {
+  $variables['attributes'] = drupal_attributes(array(
+    'data-share-url' => $variables['share_url'],
+    'data-share-title' => $variables['share_title'],
+    'data-popup-width' => $variables['popup_width'],
+    'data-popup-height' => $variables['popup_height'],
+  ));
 }
