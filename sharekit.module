@@ -13,20 +13,20 @@
  *                        mailru, odnoklassniki, pinterest.
  * @return array
  */
-function sharek_get_counts($url, $networks) {
-  $sharek = new Sharek();
+function sharekit_get_counts($url, $networks) {
+  $sharekit = new ShareKit();
 
-  return $sharek->getCount($url, $networks);
+  return $sharekit->getCount($url, $networks);
 }
 
 /**
  * Implements hook_theme().
  */
-function sharek_theme() {
-  $path = drupal_get_path('module', 'sharek') . '/theme';
+function sharekit_theme() {
+  $path = drupal_get_path('module', 'sharekit') . '/theme';
 
   return array(
-    'sharek' => array(
+    'sharekit' => array(
       'variables' => array(
         'share_url' => NULL,
         'share_title' => NULL,
@@ -34,8 +34,8 @@ function sharek_theme() {
         'popup_width' => NULL,
         'popup_height' => NULL,
       ),
-      'template' => 'sharek',
-      'pattern' => 'sharek__',
+      'template' => 'sharekit',
+      'pattern' => 'sharekit__',
       'path' => $path,
     ),
   );
@@ -52,17 +52,17 @@ function sharek_theme() {
  * @throws \Exception
  * @internal param $url
  */
-function sharek_get_button($network, $style = NULL, $options = array()) {
+function sharekit_get_button($network, $style = NULL, $options = array()) {
   $options['network'] = $network;
   $options['style'] = $style;
 
   $suggestions = array();
   if ($style) {
-    $suggestions[] = 'sharek__' . $network . '__' . $style;
-    $suggestions[] = 'sharek__' . $style;
+    $suggestions[] = 'sharekit__' . $network . '__' . $style;
+    $suggestions[] = 'sharekit__' . $style;
   }
-  $suggestions[] = 'sharek__' . $network;
-  $suggestions[] = 'sharek';
+  $suggestions[] = 'sharekit__' . $network;
+  $suggestions[] = 'sharekit';
 
   return theme($suggestions, $options);
 }
@@ -76,22 +76,22 @@ function sharek_get_button($network, $style = NULL, $options = array()) {
  * @return string
  * @throws \Exception
  */
-function sharek_get_buttons($networks, $style = NULL, $options = array()) {
+function sharekit_get_buttons($networks, $style = NULL, $options = array()) {
   $result = '';
+  $options['style'] = $style;
 
   foreach ($networks as $key => $network) {
-    $options[$key]['network'] = $network;
-    $options[$key]['style'] = $style;
+    $options['network'] = $network;
 
     $suggestions = array();
     if ($style) {
-      $suggestions[] = 'sharek__' . $network . '__' . $style;
-      $suggestions[] = 'sharek__' . $style;
+      $suggestions[] = 'sharekit__' . $network . '__' . $style;
+      $suggestions[] = 'sharekit__' . $style;
     }
-    $suggestions[] = 'sharek__' . $network;
-    $suggestions[] = 'sharek';
+    $suggestions[] = 'sharekit__' . $network;
+    $suggestions[] = 'sharekit';
 
-    $result .= theme($suggestions, $options[$key]);
+    $result .= theme($suggestions, $options);
   }
 
   return $result;
@@ -100,7 +100,7 @@ function sharek_get_buttons($networks, $style = NULL, $options = array()) {
 /**
  * Implements hook_preprocess_HOOK().
  */
-function template_preprocess_sharek(&$variables) {
+function template_preprocess_sharekit(&$variables) {
   // Set default values.
   global $base_url;
   $variables['share_url'] === NULL ? $variables['share_url'] = $base_url . '/' . request_path() : FALSE;
@@ -108,22 +108,22 @@ function template_preprocess_sharek(&$variables) {
   $variables['label'] === NULL ? $variables['label'] = t('Share') : FALSE;
   $variables['popup_width'] === NULL ? $variables['popup_width'] = 600 : FALSE;
   $variables['popup_height'] === NULL ? $variables['popup_height'] = 450 : FALSE;
-  $variables['classes_array'][] = 'sharek-' . $variables['network'];
-  $variables['style'] != NULL ? $variables['classes_array'][] = 'sharek-' . $variables['style'] : $variables['classes_array'][] = 'sharek-default';
+  $variables['classes_array'][] = 'sharekit-' . $variables['network'];
+  $variables['style'] != NULL ? $variables['classes_array'][] = 'sharekit-' . $variables['style'] : $variables['classes_array'][] = 'sharekit-default';
 
   // Get current share count.
-  $sharek = new Sharek();
-  $count = $sharek->getCount($variables['share_url'], array($variables['network']));
+  $sharekit = new sharekit();
+  $count = $sharekit->getCount($variables['share_url'], array($variables['network']));
   $variables['share_count'] = $count[$variables['network']];
 
   // Add styles.
-  drupal_add_css(drupal_get_path('module', 'sharek') . '/css/sharek.css');
+  drupal_add_css(drupal_get_path('module', 'sharekit') . '/css/sharekit.css');
 }
 
 /**
  * Implements hook_process_hook
  */
-function template_process_sharek(&$variables) {
+function template_process_sharekit(&$variables) {
   $variables['attributes'] = drupal_attributes(array(
     'data-share-url' => $variables['share_url'],
     'data-share-title' => $variables['share_title'],

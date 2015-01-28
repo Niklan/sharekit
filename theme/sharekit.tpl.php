@@ -16,17 +16,17 @@
  * - $share_count
  *
  * Template suggestions:
- * - sharek--NETWORK--STYLE.tpl.php
- * - sharek--STYLE.tpl.php
- * - sharek--NETWORK.tpl.php
- * - sharek.tpl.php
+ * - sharekit--NETWORK--STYLE.tpl.php
+ * - sharekit--STYLE.tpl.php
+ * - sharekit--NETWORK.tpl.php
+ * - sharekit.tpl.php
  *
- * For example. Button called buy sharek_get_ubtton('facebook', 'flat) can be
+ * For example. Button called buy sharekit_get('facebook', 'flat) can be
  * themed by templates:
- * - sharek--facebook--flat.tpl.php
- * - sharek--flat.tpl.php
- * - sharek--facebook.tpl.php
- * - sharek.tpl.php
+ * - sharekit--facebook--flat.tpl.php
+ * - sharekit--flat.tpl.php
+ * - sharekit--facebook.tpl.php
+ * - sharekit.tpl.php
  */
 ?>
 <div class="<?php print $classes; ?>" <?php print $attributes; ?>>

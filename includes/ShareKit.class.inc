@@ -5,7 +5,7 @@
  * Class for working with networks.
  */
 
-class Sharek {
+class sharekit {
 
   /**
    * Request builder.
