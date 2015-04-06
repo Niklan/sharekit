@@ -42,32 +42,6 @@ function sharekit_theme() {
 }
 
 /**
- * Return button.
- *
- * @param string $network Network name.
- * @param array $options Must contain at least 'share_url' value. Also can get
- *                        'label', 'popup_width' and 'popup-height'.
- * @param string $style Style name.
- * @return string
- * @throws \Exception
- * @internal param $url
- */
-function sharekit_get_button($network, $style = NULL, $options = array()) {
-  $options['network'] = $network;
-  $options['style'] = $style;
-
-  $suggestions = array();
-  if ($style) {
-    $suggestions[] = 'sharekit__' . $network . '__' . $style;
-    $suggestions[] = 'sharekit__' . $style;
-  }
-  $suggestions[] = 'sharekit__' . $network;
-  $suggestions[] = 'sharekit';
-
-  return theme($suggestions, $options);
-}
-
-/**
  * Get buttons multiple.
  *
  * @param $networks
@@ -76,7 +50,7 @@ function sharekit_get_button($network, $style = NULL, $options = array()) {
  * @return string
  * @throws \Exception
  */
-function sharekit_get_buttons($networks, $style = NULL, $options = array()) {
+function sharekit_buttons($networks, $style = NULL, $options = array()) {
   $result = '';
   $options['style'] = $style;
 

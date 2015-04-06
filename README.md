@@ -15,19 +15,30 @@ Available social buttons (machine name for using in API):
 
 ## API
 
+This module provide one simple API call that returns share count for specific URL.
+
+~~~php
+$shares = sharekit_get_counts('http://google.ru/', array('facebook', 'vkontakte'));
+// Print number of shares for specific network.
+print $shares['facebook'];
+print $shares['vkontakte'];
+~~~
+
+## How to use
+
 Print single share button.
 ~~~php
-print sharekit_get_button('facebook');
+print sharekit_get_buttons('facebook');
 ~~~
 
 Print multiple share buttons.
 ~~~php
-print sharekit_get_buttons('facebook, vkontakte, twitter');
+print sharekit_buttons('facebook, vkontakte, twitter');
 ~~~
 
 Print share button with custom style.
 ~~~php
-print sharekit_get_button('facebook', 'mystyle');
+print sharekit_buttons('facebook', 'mystyle');
 ~~~
 
 Then you must create one or more template files:
@@ -43,7 +54,7 @@ sharekit--mystyle.tpl.php
 
 Print share button with options:
 ~~~php
-print sharekit_get_button('facebook', NULL, array(
+print sharekit_buttons('facebook', NULL, array(
     'share_url' => 'http://niklan.net',
     'share_title' => 'My personal blog'
 ));
