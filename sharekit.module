@@ -80,7 +80,9 @@ function sharekit_get_buttons($networks, $style = NULL, $options = array()) {
   $result = '';
   $options['style'] = $style;
 
-  foreach ($networks as $key => $network) {
+  $networks_array = explode(',', str_replace(' ', '', $networks));
+
+  foreach ($networks_array as $key => $network) {
     $options['network'] = $network;
 
     $suggestions = array();
@@ -108,16 +110,18 @@ function template_preprocess_sharekit(&$variables) {
   $variables['label'] === NULL ? $variables['label'] = t('Share') : FALSE;
   $variables['popup_width'] === NULL ? $variables['popup_width'] = 600 : FALSE;
   $variables['popup_height'] === NULL ? $variables['popup_height'] = 450 : FALSE;
-  $variables['classes_array'][] = 'sharekit-' . $variables['network'];
-  $variables['style'] != NULL ? $variables['classes_array'][] = 'sharekit-' . $variables['style'] : $variables['classes_array'][] = 'sharekit-default';
+  $variables['classes_array'][] = $variables['network'];
+  $variables['style'] != NULL ? $variables['classes_array'][] = $variables['style'] : $variables['classes_array'][] = 'default';
 
   // Get current share count.
   $sharekit = new sharekit();
   $count = $sharekit->getCount($variables['share_url'], array($variables['network']));
   $variables['share_count'] = $count[$variables['network']];
 
-  // Add styles.
-  drupal_add_css(drupal_get_path('module', 'sharekit') . '/css/sharekit.css');
+  // Add styles only for default style.
+  if ($variables['style'] == NULL) {
+    drupal_add_css(drupal_get_path('module', 'sharekit') . '/css/sharekit.css');
+  }
 }
 
 /**
@@ -125,6 +129,7 @@ function template_preprocess_sharekit(&$variables) {
  */
 function template_process_sharekit(&$variables) {
   $variables['attributes'] = drupal_attributes(array(
+    'data-social-network' => $variables['network'],
     'data-share-url' => $variables['share_url'],
     'data-share-title' => $variables['share_title'],
     'data-popup-width' => $variables['popup_width'],
