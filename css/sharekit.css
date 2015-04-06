@@ -6,8 +6,6 @@
     text-decoration: none;
     font-size: 100%;
     color: black;
-    font-size: 0.875rem;
-    cursor: pointer;
 }
 .sharekit.default .share-label,
 .sharekit.default .share-count {
@@ -17,4 +15,8 @@
 .sharekit.default .share-count {
     border-left: 1px solid rgb(205, 205, 205);
     padding: 0.25em 0.75em;
+}
+.sharekit[data-popup="true"],
+.sharekit [data-popup="true"] {
+    cursor: pointer;
 }

@@ -15,8 +15,9 @@
  */
 function sharekit_get_counts($url, $networks) {
   $sharekit = new ShareKit();
+  $networks_array = explode(',', str_replace(' ', '', $networks));
 
-  return $sharekit->getCount($url, $networks);
+  return $sharekit->getCount($url, $networks_array);
 }
 
 /**
