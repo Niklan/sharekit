@@ -14,6 +14,8 @@
  *                you must add them manually.
  * - $classes
  * - $share_count
+ * - $clickable: mark element as clickable. This means, click on this element
+ *               call popup with share.
  *
  * Template suggestions:
  * - sharekit--NETWORK--STYLE.tpl.php
@@ -29,7 +31,7 @@
  * - sharekit.tpl.php
  */
 ?>
-<div class="<?php print $classes; ?>" <?php print $attributes; ?>>
+<div class="<?php print $classes; ?>" <?php print $attributes; ?> <?php print $clickable; ?>>
   <span class="share-label"><?php print $label; ?></span>
   <span class="share-count"><?php print $share_count; ?></span>
 </div>

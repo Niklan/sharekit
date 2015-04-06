@@ -113,6 +113,11 @@ function template_preprocess_sharekit(&$variables) {
   $variables['classes_array'][] = $variables['network'];
   $variables['style'] != NULL ? $variables['classes_array'][] = $variables['style'] : $variables['classes_array'][] = 'default';
 
+  // Variable for marking element as clickable for popup call.
+  $variables['clickable'] = drupal_attributes(array(
+    'data-popup' => 'true'
+  ));
+
   // Get current share count.
   $sharekit = new sharekit();
   $count = $sharekit->getCount($variables['share_url'], array($variables['network']));
@@ -122,6 +127,8 @@ function template_preprocess_sharekit(&$variables) {
   if ($variables['style'] == NULL) {
     drupal_add_css(drupal_get_path('module', 'sharekit') . '/css/sharekit.css');
   }
+
+  drupal_add_js(drupal_get_path('module', 'sharekit') . '/js/sharekit.js');
 }
 
 /**

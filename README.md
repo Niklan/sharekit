@@ -47,7 +47,7 @@ print sharekit_get_button('facebook', NULL, array(
     'share_url' => 'http://niklan.net',
     'share_title' => 'My personal blog'
 ));
-~~
+~~~
 
 You can use several options for share buttons:
 
