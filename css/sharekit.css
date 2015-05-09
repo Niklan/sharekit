@@ -1,22 +1,26 @@
 .sharekit.default {
-    display: inline-block;
-    background: white;
-    border: 1px solid rgb(205, 205, 205);
-    border-radius: 2px;
-    text-decoration: none;
-    font-size: 100%;
-    color: black;
+  display: inline-block;
+  background: white;
+  border: 1px solid rgb(205, 205, 205);
+  border-radius: 2px;
+  text-decoration: none;
+  font-size: 100%;
+  color: black;
+  margin: 0em 0.5em 0.25em 0em;
 }
+
 .sharekit.default .share-label,
 .sharekit.default .share-count {
-    display: inline-block;
-    padding: 0.25em 0.5em;
+  display: inline-block;
+  padding: 0.25em 0.5em;
 }
+
 .sharekit.default .share-count {
-    border-left: 1px solid rgb(205, 205, 205);
-    padding: 0.25em 0.75em;
+  border-left: 1px solid rgb(205, 205, 205);
+  padding: 0.25em 0.75em;
 }
+
 .sharekit[data-popup="true"],
 .sharekit [data-popup="true"] {
-    cursor: pointer;
+  cursor: pointer;
 }

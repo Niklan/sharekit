@@ -182,7 +182,7 @@ class sharekit {
     $request = $this->_request("http://connect.mail.ru/share_count?url_list={$url}");
     $result = json_decode($request);
 
-    return $result->$url->shares;
+    return $result->$url->shares ? $result->$url->shares : 0;
   }
 
   /**
