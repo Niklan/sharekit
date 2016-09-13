@@ -1,7 +1,0 @@
-name = ShareKit
-description = Simple API for social share buttons.
-core = 7.x
-version = 7.x-1.x
-
-; Import our class.
-files[] = includes/ShareKit.class.inc

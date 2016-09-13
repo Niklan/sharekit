@@ -1,0 +1,4 @@
+name: ShareKit
+description: Simple API for social share buttons.
+core: 8.x
+version: 1.x
