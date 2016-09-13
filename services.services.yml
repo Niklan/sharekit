@@ -1,0 +1,4 @@
+services:
+  plugin.manager.sharekit:
+    class: Drupal\sharekit\ShareKitManager
+    parent: default_plugin_manager

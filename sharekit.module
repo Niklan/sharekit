@@ -1,0 +1,9 @@
+<?php
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function sharekit_preprocess_page(&$variables) {
+  //$type = \Drupal::service('plugin.manager.sharekit');
+  //ksm($type);
+}
