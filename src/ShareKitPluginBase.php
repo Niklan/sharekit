@@ -17,7 +17,7 @@ abstract class ShareKitPluginBase extends PluginBase implements ShareKitPluginIn
    * {@inheritdoc}
    */
   public function getName() {
-    return $this->pluginDefinition['name'];
+    return $this->pluginDefinition['id'];
   }
 
   /**

@@ -8,11 +8,11 @@ use Drupal\sharekit\ShareKitPluginBase;
  * ShareKit plugin for Facebook.
  *
  * @ShareKit(
- *   id="facebook",
- *   is_countable="TRUE",
+ *   id="twitter",
+ *   is_countable="FALSE",
  * )
  */
-class Facebook extends ShareKitPluginBase {
+class Twitter extends ShareKitPluginBase {
 
 
 

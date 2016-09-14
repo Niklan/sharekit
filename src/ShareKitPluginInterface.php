@@ -13,8 +13,6 @@ interface ShareKitPluginInterface extends PluginInspectionInterface {
 
   /**
    * {@inheritdoc}
-   *
-   * @var boolean
    */
   public function isCountable();
 
