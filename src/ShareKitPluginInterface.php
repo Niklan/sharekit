@@ -2,10 +2,9 @@
 
 namespace Drupal\sharekit;
 
-use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Component\Plugin\PluginInspectionInterface;
 
-interface ShareKitPluginInterface extends PluginInspectionInterface, ContainerFactoryPluginInterface {
+interface ShareKitPluginInterface extends PluginInspectionInterface {
 
   /**
    * {@inheritdoc}

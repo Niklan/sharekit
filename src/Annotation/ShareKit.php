@@ -9,7 +9,7 @@ use Drupal\Component\Annotation\Plugin;
  *
  * @Annotation
  */
-class ReusableForm extends Plugin {
+class ShareKit extends Plugin {
 
   /**
    * The plugin ID.
