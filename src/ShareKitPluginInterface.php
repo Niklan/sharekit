@@ -16,4 +16,9 @@ interface ShareKitPluginInterface extends PluginInspectionInterface {
    */
   public function isCountable();
 
+  /**
+   * {@inheritdoc}
+   */
+  public function getShareUrl();
+
 }

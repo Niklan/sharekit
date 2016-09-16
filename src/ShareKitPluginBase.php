@@ -27,4 +27,11 @@ abstract class ShareKitPluginBase extends PluginBase implements ShareKitPluginIn
     return $this->pluginDefinition['is_countable'];
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function getShareUrl() {
+    // TODO: Implement getShareUrl() method.
+  }
+
 }
